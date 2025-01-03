@@ -6,10 +6,7 @@ export class userRoutesV1 {
 		const router = Router();
 
 		// Declare all routes here
-		router.use(
-			"/auth",
-			AuthRoutes.routes,
-		);
+		router.use("/auth", AuthRoutes.routes);
 
 		return router;
 	}

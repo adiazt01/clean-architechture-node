@@ -13,31 +13,21 @@ interface UserToken {
 }
 
 interface RegisterUserUseCase {
-	execute(
-		registerUserDto: RegisterUserDto,
-	): Promise<UserToken>;
+	execute(registerUserDto: RegisterUserDto): Promise<UserToken>;
 }
 
-export class UserRegister
-	implements RegisterUserUseCase
-{
+export class UserRegister implements RegisterUserUseCase {
 	constructor(
 		private readonly authRepository: AuthRepository,
 		private readonly jwtService: JwtService,
 	) {}
 
-	async execute(
-		registerUserDto: RegisterUserDto,
-	): Promise<UserToken> {
-		const newUser =
-			await this.authRepository.register(
-				registerUserDto!,
-			);
+	async execute(registerUserDto: RegisterUserDto): Promise<UserToken> {
+		const newUser = await this.authRepository.register(registerUserDto!);
 
-		const token =
-			this.jwtService.genereToken({
-				id: newUser.id,
-			});
+		const token = this.jwtService.genereToken({
+			id: newUser.id,
+		});
 
 		return {
 			token: token,

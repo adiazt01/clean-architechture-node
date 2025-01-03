@@ -1,8 +1,4 @@
-import {
-	Request,
-	Response,
-	NextFunction,
-} from "express";
+import { Request, Response, NextFunction } from "express";
 import { CustomError } from "../../../../domain/errors/custom.error";
 
 export class ErrorHandler {
@@ -12,13 +8,8 @@ export class ErrorHandler {
 		res: Response,
 		next: NextFunction,
 	) {
-		const statusCode =
-			err instanceof CustomError
-				? err.statusCode
-				: 500;
-		const message =
-			err.message ||
-			"Internal Server Error";
+		const statusCode = err instanceof CustomError ? err.statusCode : 500;
+		const message = err.message || "Internal Server Error";
 
 		const response = {
 			error: {
@@ -27,8 +18,6 @@ export class ErrorHandler {
 			},
 		};
 
-		res
-			.status(statusCode)
-			.json(response);
+		res.status(statusCode).json(response);
 	}
 }

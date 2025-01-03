@@ -1,8 +1,4 @@
-import {
-	createLogger,
-	format,
-	transports,
-} from "winston";
+import { createLogger, format, transports } from "winston";
 
 export class LoggerService {
 	private logger;
@@ -12,15 +8,9 @@ export class LoggerService {
 			level: "info",
 			format: format.combine(
 				format.timestamp(),
-				format.printf(
-					({
-						timestamp,
-						level,
-						message,
-					}) => {
-						return `${timestamp} [${level}]: ${message}`;
-					},
-				),
+				format.printf(({ timestamp, level, message }) => {
+					return `${timestamp} [${level}]: ${message}`;
+				}),
 			),
 			transports: [
 				new transports.Console(),

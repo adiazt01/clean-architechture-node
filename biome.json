@@ -24,7 +24,7 @@
 			"attributePosition": "auto",
 			"indentStyle": "tab",
 			"indentWidth": 2,
-			"lineWidth": 40,
+			"lineWidth": 80,
 			"lineEnding": "lf"
 		},
 		"parser": {

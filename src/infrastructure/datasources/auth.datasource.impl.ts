@@ -14,9 +14,7 @@ import { inject } from "inversify";
 import { TYPES } from "../../../types";
 
 @injectable()
-export class AuthDatasourceImpl
-	implements AuthDataSource
-{
+export class AuthDatasourceImpl implements AuthDataSource {
 	private db: IDatabaseOrm;
 	private encriptation: EncriptationService;
 
@@ -30,39 +28,24 @@ export class AuthDatasourceImpl
 		this.encriptation = encriptation;
 	}
 
-	login(
-		email: string,
-		password: string,
-	): Promise<UserEntity> {
-		throw new Error(
-			"Method not implemented.",
-		);
+	login(email: string, password: string): Promise<UserEntity> {
+		throw new Error("Method not implemented.");
 	}
 
-	async register(
-		registerUserDto: RegisterUserDto,
-	): Promise<UserEntity> {
-		const { email, name, password } =
-			registerUserDto;
+	async register(registerUserDto: RegisterUserDto): Promise<UserEntity> {
+		const { email, name, password } = registerUserDto;
 
 		try {
 			const userFound = await this.db
 				.select()
 				.from(usersTable)
-				.where(
-					eq(usersTable.email, email),
-				);
+				.where(eq(usersTable.email, email));
 
 			if (userFound.length > 0) {
-				throw CustomError.badRequest(
-					"Invalid email or password",
-				);
+				throw CustomError.badRequest("Invalid email or password");
 			}
 
-			const hashedPassword =
-				await this.encriptation.hash(
-					password,
-				);
+			const hashedPassword = await this.encriptation.hash(password);
 
 			const newUser = await this.db
 				.insert(usersTable)
@@ -78,10 +61,7 @@ export class AuthDatasourceImpl
 				throw CustomError.internalServerError();
 			}
 
-			const userEntity =
-				UserMapper.userEntityToObject(
-					newUser[0],
-				);
+			const userEntity = UserMapper.userEntityToObject(newUser[0]);
 
 			if (!userEntity) {
 				throw CustomError.internalServerError();
@@ -89,9 +69,7 @@ export class AuthDatasourceImpl
 
 			return userEntity;
 		} catch (error) {
-			if (
-				error instanceof CustomError
-			) {
+			if (error instanceof CustomError) {
 				throw error;
 			}
 
@@ -100,13 +78,9 @@ export class AuthDatasourceImpl
 	}
 
 	logout(): Promise<void> {
-		throw new Error(
-			"Method not implemented.",
-		);
+		throw new Error("Method not implemented.");
 	}
 	getUser(): Promise<UserEntity> {
-		throw new Error(
-			"Method not implemented.",
-		);
+		throw new Error("Method not implemented.");
 	}
 }

@@ -9,24 +9,17 @@ import { inject } from "inversify";
 import { TYPES } from "../../../types";
 
 @injectable()
-export class AuthRepositoryImpl
-	implements AuthRepository
-{
+export class AuthRepositoryImpl implements AuthRepository {
 	private authDatasource: AuthDataSource;
 
 	constructor(
 		@inject(TYPES.AuthDataSource)
 		authDatasource: AuthDataSource,
 	) {
-		this.authDatasource =
-			authDatasource;
+		this.authDatasource = authDatasource;
 	}
 
-	async register(
-		registerUserDto: RegisterUserDto,
-	): Promise<UserEntity> {
-		return this.authDatasource.register(
-			registerUserDto,
-		);
+	async register(registerUserDto: RegisterUserDto): Promise<UserEntity> {
+		return this.authDatasource.register(registerUserDto);
 	}
 }
