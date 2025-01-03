@@ -7,6 +7,7 @@ export class UserMapper {
             return null;
         }
         const { age, email, name, id } = object;
+        
         return new UserEntity()
     }
 }
