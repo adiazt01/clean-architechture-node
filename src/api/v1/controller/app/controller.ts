@@ -43,6 +43,7 @@ export class AuthController {
 				this.authRepository,
 				this.jwtService,
 			).execute(registerUserDto!);
+			
 			this.logger.info(`User ${newUser.user.email} has been created`);
 
 			res.status(201).json(newUser);
