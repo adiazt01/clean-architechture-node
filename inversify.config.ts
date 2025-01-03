@@ -1,15 +1,15 @@
 import { Container } from "inversify";
-import { AuthRepository } from "./src/domain/repositories/auth.repository";
-import { AuthRepositoryImpl } from "./src/infrastructure/repositories/auth.repository.impl";
-import { AuthDataSource } from "./src/domain/datasources/auth.datasource";
+import { AuthController } from "./src/api/v1/controller/app/controller";
+import { envs } from "./src/config";
+import { type IDatabaseOrm, db } from "./src/data/sqlite";
+import type { AuthDataSource } from "./src/domain/datasources/auth.datasource";
+import type { AuthRepository } from "./src/domain/repositories/auth.repository";
 import { AuthDatasourceImpl } from "./src/infrastructure/datasources/auth.datasource.impl";
+import { AuthRepositoryImpl } from "./src/infrastructure/repositories/auth.repository.impl";
 import { EncriptationService } from "./src/infrastructure/services/encriptation.service";
 import { JwtService } from "./src/infrastructure/services/jwt.service";
 import { LoggerService } from "./src/infrastructure/services/logger.service";
 import { TYPES } from "./types";
-import { db, IDatabaseOrm } from "./src/data/sqlite";
-import { envs } from "./src/config";
-import { AuthController } from "./src/api/v1/controller/app/controller";
 
 const container = new Container();
 

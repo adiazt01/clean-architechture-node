@@ -1,4 +1,4 @@
-import express, { Express, Router } from "express";
+import express, { type Express, type Router } from "express";
 import { ErrorHandler } from "./api/v1/routes/middlewares/error.middleware";
 
 interface IOptions {

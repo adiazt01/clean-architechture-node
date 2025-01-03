@@ -1,17 +1,17 @@
 import { eq } from "drizzle-orm";
-import { IDatabaseOrm } from "../../data/sqlite";
-import { usersTable } from "../../data/sqlite/models/user.schema";
-import {
-	AuthDataSource,
-	CustomError,
-	RegisterUserDto,
-	UserEntity,
-} from "../../domain";
-import { EncriptationService } from "../services/encriptation.service";
-import { UserMapper } from "../mappers/user.mapper";
 import { injectable } from "inversify";
 import { inject } from "inversify";
 import { TYPES } from "../../../types";
+import type { IDatabaseOrm } from "../../data/sqlite";
+import { usersTable } from "../../data/sqlite/models/user.schema";
+import {
+	type AuthDataSource,
+	CustomError,
+	type RegisterUserDto,
+	type UserEntity,
+} from "../../domain";
+import { UserMapper } from "../mappers/user.mapper";
+import type { EncriptationService } from "../services/encriptation.service";
 
 @injectable()
 export class AuthDatasourceImpl implements AuthDataSource {

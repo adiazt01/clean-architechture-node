@@ -11,18 +11,16 @@ export class CustomError extends Error {
 		return new CustomError(message, 400);
 	}
 
-	static unauthorized(message: string = "Unauthorized"): CustomError {
+	static unauthorized(message = "Unauthorized"): CustomError {
 		return new CustomError(message, 401);
 	}
 
-	static internalServerError(
-		message: string = "Internal server error",
-	): CustomError {
+	static internalServerError(message = "Internal server error"): CustomError {
 		return new CustomError(message, 500);
 	}
 
 	static badDatabaseConnection(
-		message: string = "Bad database connection",
+		message = "Bad database connection",
 	): CustomError {
 		return new CustomError(message, 500);
 	}

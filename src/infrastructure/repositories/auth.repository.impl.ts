@@ -1,12 +1,12 @@
 import { injectable } from "inversify";
-import {
+import { inject } from "inversify";
+import { TYPES } from "../../../types";
+import type {
 	AuthDataSource,
 	AuthRepository,
 	RegisterUserDto,
 	UserEntity,
 } from "../../domain";
-import { inject } from "inversify";
-import { TYPES } from "../../../types";
 
 @injectable()
 export class AuthRepositoryImpl implements AuthRepository {

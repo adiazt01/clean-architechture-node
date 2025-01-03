@@ -1,7 +1,7 @@
-import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
-import { CustomError } from "../../domain";
+import { type LibSQLDatabase, drizzle } from "drizzle-orm/libsql";
 import { envs } from "../../config";
+import { CustomError } from "../../domain";
 
 interface IDrizzleOrmOptions {
 	url: string;

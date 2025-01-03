@@ -1,16 +1,16 @@
-import { Application, NextFunction, Request, Response } from "express";
-import {
-	AuthRepository,
-	CustomError,
-	RegisterUserDto,
-} from "../../../../domain";
-import { JwtService } from "../../../../infrastructure/services/jwt.service";
-import { UserRegister } from "../../../../domain/use-cases/auth/user-register.use-case";
-import { LoggerService } from "../../../../infrastructure/services/logger.service";
+import type { NextFunction, Request, Response } from "express";
 import { injectable } from "inversify";
 import { inject } from "inversify";
 import { TYPES } from "../../../../../types";
-import { AuthRepositoryImpl } from "../../../../infrastructure";
+import {
+	type AuthRepository,
+	CustomError,
+	RegisterUserDto,
+} from "../../../../domain";
+import { UserRegister } from "../../../../domain/use-cases/auth/user-register.use-case";
+import type { AuthRepositoryImpl } from "../../../../infrastructure";
+import type { JwtService } from "../../../../infrastructure/services/jwt.service";
+import type { LoggerService } from "../../../../infrastructure/services/logger.service";
 
 @injectable()
 export class AuthController {
@@ -43,7 +43,7 @@ export class AuthController {
 				this.authRepository,
 				this.jwtService,
 			).execute(registerUserDto!);
-			
+
 			this.logger.info(`User ${newUser.user.email} has been created`);
 
 			res.status(201).json(newUser);

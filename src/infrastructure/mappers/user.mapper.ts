@@ -1,5 +1,5 @@
+import type { usersTable } from "../../data/sqlite/models/user.schema";
 import { CustomError, UserEntity } from "../../domain";
-import { usersTable } from "../../data/sqlite/models/user.schema";
 
 export class UserMapper {
 	static userEntityToObject(

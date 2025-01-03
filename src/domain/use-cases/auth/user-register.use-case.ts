@@ -1,7 +1,7 @@
-import { JwtService } from "../../../infrastructure/services/jwt.service";
-import { RegisterUserDto } from "../../dtos/auth/register-user.dto";
+import type { JwtService } from "../../../infrastructure/services/jwt.service";
+import type { RegisterUserDto } from "../../dtos/auth/register-user.dto";
 import { UserEntity } from "../../entities/user.entity";
-import { AuthRepository } from "../../repositories/auth.repository";
+import type { AuthRepository } from "../../repositories/auth.repository";
 
 interface UserToken {
 	token: string;

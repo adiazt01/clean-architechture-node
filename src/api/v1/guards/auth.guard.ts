@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { JwtService } from "../../../infrastructure/services/jwt.service";
+import type { NextFunction, Request, Response } from "express";
 import { CustomError } from "../../../domain";
+import type { JwtService } from "../../../infrastructure/services/jwt.service";
 
 export class AuthGuard {
 	private jwtService: JwtService;

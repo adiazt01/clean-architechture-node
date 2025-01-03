@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { CustomError } from "../../../../domain/errors/custom.error";
 
 export class ErrorHandler {
