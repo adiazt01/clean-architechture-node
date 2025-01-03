@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
-import { AuthRepository, RegisterUserDto } from "../../domain"
+import { AuthRepository, CustomError, RegisterUserDto } from "../../domain"
 import { JwtService } from "../../infrastructure/services/jwt.service"
+import { UserRegister } from "../../domain/use-cases/auth/user-register.use-case"
 
 export class AuthController {
     private authRepository: AuthRepository
@@ -19,17 +20,12 @@ export class AuthController {
             const [error, registerUserDto] = RegisterUserDto.create(req.body)
             
             if (error) {
-                res.status(400).json({ error: error })
+                throw CustomError.badRequest('Invalid data')
             }
             
-            const newUser = await this.authRepository.register(registerUserDto!)
+            const newUser = await new UserRegister(this.authRepository, this.jwtService).execute(registerUserDto!)
 
-            const token = this.jwtService.genereToken({ id: newUser.id })
-            
-            res.json({
-                user: newUser,
-                token: token
-            })
+            res.status(201).json(newUser)
         } catch (error) {
             next(error)
         }
