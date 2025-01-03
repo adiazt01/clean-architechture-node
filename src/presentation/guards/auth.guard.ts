@@ -7,7 +7,6 @@ export class AuthGuard {
     private jwtService: JwtService;
 
     constructor(jwtService: JwtService) {
-        console.log(jwtService);
         this.jwtService = jwtService;
     }
 
