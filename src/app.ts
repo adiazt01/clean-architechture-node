@@ -1,12 +1,12 @@
+import { ApiRoutes } from "./api/api"
 import { envs } from "./config"
-import { AppRoutes } from "./presentation/routes"
-import { Server } from "./presentation/server"
+import { Server } from "./server"
 
 
 function main() {
     const server = new Server({
         port: envs.PORT,
-        routes: AppRoutes.routes,
+        routes: ApiRoutes.routes,
     })
     server.start()
 }

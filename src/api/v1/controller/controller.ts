@@ -1,12 +1,12 @@
 import { Application, NextFunction, Request, Response } from "express"
-import { AuthRepository, CustomError, RegisterUserDto } from "../../domain"
-import { JwtService } from "../../infrastructure/services/jwt.service"
-import { UserRegister } from "../../domain/use-cases/auth/user-register.use-case"
-import { LoggerService } from "../../infrastructure/services/logger.service"
+import { AuthRepository, CustomError, RegisterUserDto } from "../../../domain"
+import { JwtService } from "../../../infrastructure/services/jwt.service"
+import { UserRegister } from "../../../domain/use-cases/auth/user-register.use-case"
+import { LoggerService } from "../../../infrastructure/services/logger.service"
 import { injectable } from "inversify"
 import { inject } from "inversify"
-import { TYPES } from "../../../types"
-import { AuthRepositoryImpl } from "../../infrastructure"
+import { TYPES } from "../../../../types"
+import { AuthRepositoryImpl } from "../../../infrastructure"
 
 @injectable()
 export class AuthController {

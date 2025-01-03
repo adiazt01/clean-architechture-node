@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "./controller";
-import { TYPES } from "../../../types";
-import { container } from "../../../inversify.config";
+import { TYPES } from "../../../../types";
+import { container } from "../../../../inversify.config";
 
 export class AuthRoutes {
     static get routes(): Router {

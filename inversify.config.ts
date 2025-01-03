@@ -7,9 +7,9 @@ import { EncriptationService } from './src/infrastructure/services/encriptation.
 import { JwtService } from './src/infrastructure/services/jwt.service';
 import { LoggerService } from './src/infrastructure/services/logger.service';
 import { TYPES } from './types';
-import { AuthController } from './src/presentation/auth/controller';
 import { db, IDatabaseOrm } from './src/data/sqlite';
 import { envs } from './src/config';
+import { AuthController } from './src/api/v1/controller/controller';
 
 const container = new Container();
 

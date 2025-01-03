@@ -1,5 +1,5 @@
 import express, { Express, Router } from 'express'
-import { ErrorHandler } from './middlewares/error.middleware';
+import { ErrorHandler } from './api/v1/routes/middlewares/error.middleware';
 
 interface IOptions {
     port?: number,
