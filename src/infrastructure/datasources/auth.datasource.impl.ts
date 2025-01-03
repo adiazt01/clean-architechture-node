@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { IDatabaseOrm, db } from "../../data/sqlite";
+import { IDatabaseOrm } from "../../data/sqlite";
 import { usersTable } from "../../data/sqlite/models/user.schema";
 import { AuthDataSource, CustomError, RegisterUserDto, UserEntity } from "../../domain";
 import { EncriptationService } from "../services/encriptation.service";
@@ -62,6 +62,7 @@ export class AuthDatasourceImpl implements AuthDataSource {
             throw CustomError.internalServerError();
         }
     }
+
     logout(): Promise<void> {
         throw new Error("Method not implemented.");
     }

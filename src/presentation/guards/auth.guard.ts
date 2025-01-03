@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { JwtService } from "../../infrastructure/services/jwt.service";
-import { envs } from "../../config";
 import { CustomError } from "../../domain";
 
 export class AuthGuard {
