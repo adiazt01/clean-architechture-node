@@ -4,12 +4,18 @@ import { usersTable } from "../../data/sqlite/models/user.schema";
 import { AuthDataSource, CustomError, RegisterUserDto, UserEntity } from "../../domain";
 import { EncriptationService } from "../services/encriptation.service";
 import { UserMapper } from "../mappers/user.mapper";
+import { injectable } from "inversify";
+import { inject } from "inversify";
+import { TYPES } from "../../../types";
 
+@injectable()
 export class AuthDatasourceImpl implements AuthDataSource {
     private db: IDatabaseOrm;
     private encriptation: EncriptationService;
 
-    constructor(db: IDatabaseOrm, encriptation: EncriptationService) {
+    constructor(
+        @inject(TYPES.Database) db: IDatabaseOrm, 
+        @inject(TYPES.EncriptationService) encriptation: EncriptationService) {
         this.db = db;
         this.encriptation = encriptation;
     }
