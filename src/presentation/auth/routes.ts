@@ -7,9 +7,7 @@ export class AuthRoutes {
     static get routes(): Router {
         const router = Router();
         const controller = container.get<AuthController>(TYPES.AuthController);
-        
-        console.log(`controller`, controller);
-        
+                
         // Declare all routes here
         router.post('/login', (req, res, next) => controller.login(req, res, next));
         router.post('/register', (req, res, next) => controller.register(req, res, next));

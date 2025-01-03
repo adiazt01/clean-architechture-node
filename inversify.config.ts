@@ -9,6 +9,7 @@ import { LoggerService } from './src/infrastructure/services/logger.service';
 import { TYPES } from './types';
 import { AuthController } from './src/presentation/auth/controller';
 import { db, IDatabaseOrm } from './src/data/sqlite';
+import { envs } from './src/config';
 
 const container = new Container();
 
@@ -23,7 +24,7 @@ container.bind<AuthDataSource>(TYPES.AuthDataSource).to(AuthDatasourceImpl);
 
 // Services
 container.bind<EncriptationService>(TYPES.EncriptationService).to(EncriptationService);
-container.bind<JwtService>(TYPES.JwtService).toDynamicValue(() => new JwtService(process.env.JWT_SECRET!, process.env.JWT_EXPIRES_IN!));
+container.bind<JwtService>(TYPES.JwtService).toDynamicValue(() => new JwtService(envs.JWT_SECRET!, envs.JWT_EXPIRES_IN!));
 container.bind<LoggerService>(TYPES.LoggerService).to(LoggerService);
 
 // Controllers
