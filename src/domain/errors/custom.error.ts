@@ -11,7 +11,7 @@ export class CustomError extends Error {
         return new CustomError(message, 400);
     }
 
-    static unauthorized(message: string): CustomError {
+    static unauthorized(message: string = "Unauthorized"): CustomError {
         return new CustomError(message, 401);
     }
 
@@ -21,5 +21,9 @@ export class CustomError extends Error {
 
     static badDatabaseConnection(message: string = "Bad database connection"): CustomError {
         return new CustomError(message, 500);
+    }
+
+    static conflict(message: string): CustomError {
+        return new CustomError(message, 409);
     }
 }

@@ -1,13 +1,14 @@
-import { UserEntity } from "../../domain";
+import { CustomError, UserEntity } from "../../domain";
 import { usersTable } from "../../data/sqlite/models/user.schema";
 
 export class UserMapper {
-    static userEntityToObject(object: typeof usersTable.$inferInsert) {
-        if (!object) {
-            return null;
+    static userEntityToObject(object: typeof usersTable.$inferInsert): UserEntity | null {
+        const { email, name, rol, id } = object;
+
+        if (!email || !name || !rol || !id) {
+            throw CustomError.internalServerError();
         }
-        const { age, email, name, id } = object;
         
-        return new UserEntity()
+        return new UserEntity(id, name, email, [rol]);
     }
 }

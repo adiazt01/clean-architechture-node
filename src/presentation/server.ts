@@ -1,4 +1,5 @@
 import express, { Express, Router } from 'express'
+import { ErrorHandler } from './middlewares/error.middleware';
 
 interface IOptions {
     port?: number,
@@ -6,7 +7,7 @@ interface IOptions {
 }
 
 export class Server {
-    public readonly app = express()
+    public readonly app : Express = express() 
     private readonly port: number;
     private readonly routes: Router;
 
@@ -19,10 +20,12 @@ export class Server {
     async start() {
         // Middlewares
         this.app.use(express.json())
-
+        
         // Use the routes
         this.app.use(this.routes)
-
+        
+        this.app.use(ErrorHandler.handle)
+        
         this.app.listen(this.port, () => {
             console.log(`Server is running on port ${this.port}`)
         })

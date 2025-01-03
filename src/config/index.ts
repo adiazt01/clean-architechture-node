@@ -1,2 +1,2 @@
 export * from "./envs";
-export * from "./encriptation";
+export * from "../infrastructure/services/encriptation.service";
