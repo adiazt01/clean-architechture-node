@@ -10,6 +10,7 @@ import { EncriptationService } from "./src/infrastructure/services/encriptation.
 import { JwtService } from "./src/infrastructure/services/jwt.service";
 import { LoggerService } from "./src/infrastructure/services/logger.service";
 import { TYPES } from "./types";
+import { useCasesModule } from "./src/domain/module";
 
 const container = new Container();
 
@@ -33,5 +34,7 @@ container.bind<LoggerService>(TYPES.LoggerService).to(LoggerService);
 
 // Controllers
 container.bind<AuthController>(TYPES.AuthController).to(AuthController);
+
+container.load(useCasesModule)
 
 export { container };

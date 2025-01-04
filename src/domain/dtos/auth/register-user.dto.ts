@@ -1,9 +1,6 @@
 import { z } from "zod";
-
-interface ValidationError {
-	field: string;
-	message: string;
-}
+import type { ValidationError } from "../interface/interfaces";
+import { extractValidationErrors } from "../../../utils/validation";
 
 export class RegisterUserDto {
 	private constructor(
@@ -31,19 +28,14 @@ export class RegisterUserDto {
 	});
 
 	static create(object: {
-		[key: string]: any;
+		[key: string]: unknown;
 	}): [ValidationError[] | null, RegisterUserDto | null] {
 		const result = RegisterUserDto.RegisterUserSchema.safeParse(object);
 
 		if (!result.success) {
-			const errors = result.error.errors.map((error) => {
-				return {
-					field: error.path.join("."),
-					message: error.message,
-				};
-			});
-			return [errors, null];
-		}
+            const errors = extractValidationErrors(result.error);
+            return [errors, null];
+        }
 
 		const { name, email, password } = result.data;
 		return [null, new RegisterUserDto(name, email, password)];

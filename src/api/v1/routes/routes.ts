@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { container } from "../../../../inversify.config";
 import { TYPES } from "../../../../types";
-import type { AuthController } from "./controller";
+import type { AuthController } from "../controller/app/controller";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AuthRoutes {
 	static get routes(): Router {
 		const router = Router();

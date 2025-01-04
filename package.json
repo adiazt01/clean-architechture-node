@@ -8,7 +8,8 @@
 		"build": "rimraf ./dist && tsc",
 		"start": "npm run build && node ./dist/app.js",
 		"lint:check": "npx @biomejs/biome check --write .",
-		"lint:format": "npx @biomejs/biome format --write ."
+		"lint:format": "npx @biomejs/biome format --write .",
+		"db:update:dev": "npx drizzle-kit push"
 	},
 	"keywords": [],
 	"author": "",

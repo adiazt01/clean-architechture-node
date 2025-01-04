@@ -12,6 +12,7 @@ import {
 } from "../../domain";
 import { UserMapper } from "../mappers/user.mapper";
 import type { EncriptationService } from "../services/encriptation.service";
+import type { LoginUserDto } from "../../domain/dtos/auth/login-user.dto";
 
 @injectable()
 export class AuthDatasourceImpl implements AuthDataSource {
@@ -28,13 +29,43 @@ export class AuthDatasourceImpl implements AuthDataSource {
 		this.encriptation = encriptation;
 	}
 
-	login(email: string, password: string): Promise<UserEntity> {
-		throw new Error("Method not implemented.");
-	}
+	async login(loginUserDto: LoginUserDto): Promise<UserEntity> {
+        const { email, password } = loginUserDto;
+
+        try {
+            const userFound = await this.db.select().from(usersTable).where(eq(usersTable.email, email));
+
+            if (userFound.length === 0) {
+                throw CustomError.badRequest("Invalid email or password");
+            }
+
+            const user = userFound[0];
+
+            const isPasswordValid = await this.encriptation.compare(password, user.password);
+
+            if (!isPasswordValid) {
+                throw CustomError.badRequest("Invalid email or password");
+            }
+
+            const userEntity = UserMapper.userEntityToObject(user);
+
+			if (!userEntity) {
+				throw CustomError.internalServerError();
+			}
+
+			return userEntity;
+        } catch (error) {
+            if (error instanceof CustomError) {
+				throw error;
+			}
+
+			throw CustomError.internalServerError();
+        }
+    }
 
 	async register(registerUserDto: RegisterUserDto): Promise<UserEntity> {
 		const { email, name, password } = registerUserDto;
-
+		
 		try {
 			const userFound = await this.db
 				.select()
@@ -80,6 +111,7 @@ export class AuthDatasourceImpl implements AuthDataSource {
 	logout(): Promise<void> {
 		throw new Error("Method not implemented.");
 	}
+
 	getUser(): Promise<UserEntity> {
 		throw new Error("Method not implemented.");
 	}
