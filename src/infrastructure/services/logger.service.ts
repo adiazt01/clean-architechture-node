@@ -1,5 +1,6 @@
 import { createLogger, format, transports } from "winston";
 
+// TODO: Migrate to grafana or other monitoring tool
 export class LoggerService {
 	private logger;
 
